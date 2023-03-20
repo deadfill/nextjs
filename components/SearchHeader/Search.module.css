@@ -1,0 +1,16 @@
+
+.seacrhInput {
+    border: 1px solid var(--grey-07);
+    border-radius: 12px;
+    height: 52px;
+    padding: 0 12px;
+    font-size: 16px;
+    margin-right: 38px;
+    flex-grow: 1;
+    background-image: url("../../public//icon/headerIcon/searchSvg.svg");
+    background-repeat: no-repeat;
+    background-position: right;
+
+}
+
+
