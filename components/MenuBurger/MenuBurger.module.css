@@ -1,0 +1,32 @@
+.cover {
+    display: none;
+    position: fixed;
+    background-color: black;
+    opacity: 0.3;
+    top: 135px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 20;
+}
+
+.coverShow {
+    display: block;
+}
+
+.menu {
+    position: fixed;
+    visibility: hidden;
+    left: -100%;
+    z-index: 21;
+    width: 500px;
+    height: 100vh;
+    background-color: white;
+    transition: .2s ease all;
+    top: 135px;
+}
+
+.menuShow {
+    visibility: visible;
+    left: 0;
+}
