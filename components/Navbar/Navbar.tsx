@@ -25,7 +25,7 @@ const menuItem: MenuProps[] = [
 ];
 
 export default function Navbar({ ...props }: NavbarProps): JSX.Element {
-  const buildMenu = menuItem.map(({ name, route, icon }, id) => {
+  const buildMenu = menuItem.map(({ route, name, icon }, id) => {
     return (
       <li className={styles.li} key={id}>
         <Link href={`${route}`}>

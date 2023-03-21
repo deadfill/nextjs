@@ -1,6 +1,5 @@
 .button {
     display: flex;
-    flex-direction: column;
     cursor: pointer;
     align-items: center;
     border: none;
@@ -12,6 +11,16 @@
     font-size: 18px;
     margin-right: 30px;
     margin-left: 40px;
+    outline: none;
+}
+
+.button_active {
+    background-color: var(--orange-light);
+    color: var(--orange-01);
+}
+
+.span {
+    margin-right: 13px;
 }
 
 .button svg {
@@ -48,8 +57,9 @@
 }
 
 .opened_top {
+    background: var(--orange-01);
     transform: rotate(45deg);
-    transform-origin: 15% 15%;
+    transform-origin: 5% 15%;
 }
 
 .opened_mid {
@@ -57,7 +67,10 @@
 }
 
 .opened_bot {
+    background: var(--orange-01);
     transform: rotate(-45deg);
-    transform-origin: 15% 95%;
+    transform-origin: 0%;
 }
+
+
 
