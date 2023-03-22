@@ -10,6 +10,11 @@ export default function ButtonMenu({
   ...props
 }: ButtonMenuProps): JSX.Element {
   const [opened, setOpened] = useState<boolean>(false);
+  const [level, setLevel] = useState<number>(1);
+
+  const openMenu = () => {
+    setOpened(!opened), setLevel(1);
+  };
 
   return (
     <>
@@ -18,7 +23,7 @@ export default function ButtonMenu({
           [styles.button_active]: opened,
         })}
         {...props}
-        onClick={() => setOpened(!opened)}
+        onClick={openMenu}
       >
         <div className={styles.span}>
           <span
@@ -39,7 +44,12 @@ export default function ButtonMenu({
         </div>
         {children}
       </button>
-      <MenuBurger setOpened={setOpened} opened={opened} />
+      <MenuBurger
+        setOpened={setOpened}
+        opened={opened}
+        level={level}
+        setLevel={setLevel}
+      />
     </>
   );
 }
