@@ -26,7 +26,6 @@
     transition: 0.2s ease all;
     top: 135px;
     border: solid 2px white;
-    overflow: hidden;
 }
 
 .menuLevel2 {
@@ -36,15 +35,18 @@
     position: absolute;
     background-color: white;
     top: 135px;
-    left: 450px;
+    left: -100%;
     width: 300px;
     height: 100vh;
     z-index: 21;
     border-left: 1px solid #C2C4D2;
+    padding: 11px 30px 0 30px;
+    transition: 0.2s ease all;
 }
 
 .menuLevel2Show {
     visibility: visible;
+    left: 450px;
 }
 
 .menuShow {
@@ -52,7 +54,8 @@
     left: 0;
 }
 
-@keyframes menu {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
-  }
+.htag {
+    color: var(--orange-01);
+    margin: 0;
+    margin-bottom: 30px;
+}

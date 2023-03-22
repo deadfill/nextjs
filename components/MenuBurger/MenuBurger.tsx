@@ -2,10 +2,13 @@ import { MenuBurgerProps } from "./MenuBurger.props";
 import styles from "./MenuBurger.module.css";
 import clsx from "clsx";
 import { useState } from "react";
+import ButtonCatalog from "../ButtonCatalog/ButtonCatalog";
+import MenuIcon from "../../public/icon/catalogIcon/menu.svg";
 
 const menuItem = [
   {
     name: "Автоэлектрика",
+    icon: <MenuIcon />,
     children: [
       {
         name: "Стеклоочистители и комплектующие",
@@ -33,8 +36,34 @@ const menuItem = [
     ],
   },
   { name: "Новинки" },
-  { name: "Автозапчасти к технике" },
-  { name: "Комплектующие" },
+  {
+    name: "Автозапчасти к технике",
+    children: [
+      {
+        name: "Стеклоочистители и комплектующие",
+        children: [
+          { name: "Стеклоочистители" },
+          { name: "электродвигатели с дополнительным насосом" },
+        ],
+      },
+      { name: "Генераторы" },
+      { name: "Светотехника" },
+    ],
+  },
+  {
+    name: "Комплектующие",
+    children: [
+      {
+        name: "Стеклоочистители и комплектующие",
+        children: [
+          { name: "Стеклоочистители" },
+          { name: "электродвигатели с дополнительным насосом" },
+        ],
+      },
+      { name: "Генераторы" },
+      { name: "Светотехника" },
+    ],
+  },
 ];
 
 export default function MenuBurger({
@@ -78,17 +107,18 @@ export default function MenuBurger({
         })}
       >
         {menuItem.map((item, i) => {
-          if (!item.children) {
-            return (
-              <a key={i} href="">
-                {item.name}
-              </a>
-            );
-          }
+          // if (!item.children) {
+          //   return (
+          //     <Link key={i} href={item.link}>
+          //       {item.name}
+          //     </Link>
+          //   );
+          // }
           return (
-            <button key={i} onMouseOver={() => menuLevel(item)}>
+            <ButtonCatalog key={i} onClick={() => menuLevel(item)}>
+              {item.icon}
               {item.name}
-            </button>
+            </ButtonCatalog>
           );
         })}
       </div>
@@ -97,7 +127,7 @@ export default function MenuBurger({
           [styles.menuLevel2Show]: level === 2 && opened,
         })}
       >
-        <h3>{title}</h3>
+        <h3 className={styles.htag}>{title}</h3>
         {render
           ? menuLevel2.map((item, i) => {
               return <button key={i}>{item.name}</button>;

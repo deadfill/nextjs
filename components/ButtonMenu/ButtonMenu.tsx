@@ -1,8 +1,9 @@
 import { ButtonMenuProps } from "./ButtonMenu.props";
 import styles from "./ButtonMenu.module.css";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MenuBurger from "../MenuBurger/MenuBurger";
+import { useRouter } from "next/router";
 
 export default function ButtonMenu({
   appearance,
@@ -11,6 +12,9 @@ export default function ButtonMenu({
 }: ButtonMenuProps): JSX.Element {
   const [opened, setOpened] = useState<boolean>(false);
   const [level, setLevel] = useState<number>(1);
+  const dynamicRoute = useRouter().asPath;
+
+  useEffect(() => setOpened(false), [dynamicRoute]);
 
   const openMenu = () => {
     setOpened(!opened), setLevel(1);
@@ -45,6 +49,7 @@ export default function ButtonMenu({
         {children}
       </button>
       <MenuBurger
+        children
         setOpened={setOpened}
         opened={opened}
         level={level}
