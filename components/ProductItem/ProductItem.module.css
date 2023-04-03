@@ -1,0 +1,9 @@
+.wrapper {
+    display: inline-block;
+    cursor: pointer;
+    height: auto;
+    width: 240px;
+    background-color: aquamarine;
+}
+
+

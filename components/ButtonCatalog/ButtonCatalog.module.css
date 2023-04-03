@@ -19,3 +19,8 @@
     background-color: var(--orange-01);
     color: white;
 }
+
+.textWrapper {
+    display: flex;
+    align-items: center;
+}

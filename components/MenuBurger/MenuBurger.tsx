@@ -4,6 +4,9 @@ import clsx from "clsx";
 import { useState } from "react";
 import ButtonCatalog from "../ButtonCatalog/ButtonCatalog";
 import MenuIcon from "../../public/icon/catalogIcon/menu.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "../../redux/store";
+import { setClose, setMenuLevel } from "../../redux/slices/menuSlice";
 
 const menuItem = [
   {
@@ -67,23 +70,26 @@ const menuItem = [
 ];
 
 export default function MenuBurger({
-  level,
-  setLevel,
-  setOpened,
-  opened,
   children,
   ...props
 }: MenuBurgerProps): JSX.Element {
+  const dispatch = useDispatch();
+  const open = useSelector(
+    (state: AppState) => state.rootReducer.menuSlice.opened
+  );
+  const level = useSelector(
+    (state: AppState) => state.rootReducer.menuSlice.menuLevel
+  );
   const [menuLevel2, setMenuLevel2] = useState([]);
   const [render, setRender] = useState(false);
   const [title, setTitle] = useState("");
 
   const closeMenu = () => {
-    setOpened(false), setLevel(1);
+    dispatch(setClose()), dispatch(setMenuLevel(1));
   };
 
   const menuLevel = (item: any) => {
-    setLevel(2);
+    dispatch(setMenuLevel(2));
     setRender(true);
     setTitle(item.name);
     if (item.children) {
@@ -91,29 +97,20 @@ export default function MenuBurger({
     }
   };
 
-  console.log(menuLevel2);
-
   return (
     <nav className={styles.nav} {...props}>
       <div
         onClick={closeMenu}
         className={clsx(styles.cover, {
-          [styles.coverShow]: opened,
+          [styles.coverShow]: open,
         })}
       />
       <div
         className={clsx(styles.menu, {
-          [styles.menuShow]: opened,
+          [styles.menuShow]: open,
         })}
       >
         {menuItem.map((item, i) => {
-          // if (!item.children) {
-          //   return (
-          //     <Link key={i} href={item.link}>
-          //       {item.name}
-          //     </Link>
-          //   );
-          // }
           return (
             <ButtonCatalog key={i} onClick={() => menuLevel(item)}>
               {item.icon}
@@ -124,7 +121,7 @@ export default function MenuBurger({
       </div>
       <div
         className={clsx(styles.menuLevel2, {
-          [styles.menuLevel2Show]: level === 2 && opened,
+          [styles.menuLevel2Show]: level === 2 && open,
         })}
       >
         <h3 className={styles.htag}>{title}</h3>

@@ -35,18 +35,19 @@
     position: absolute;
     background-color: white;
     top: 135px;
-    left: -100%;
     width: 300px;
+    left: 450px;
     height: 100vh;
-    z-index: 21;
+    z-index: 20;
     border-left: 1px solid #C2C4D2;
     padding: 11px 30px 0 30px;
     transition: 0.2s ease all;
+    opacity: 0;
 }
 
 .menuLevel2Show {
     visibility: visible;
-    left: 450px;
+    opacity: 1;
 }
 
 .menuShow {
