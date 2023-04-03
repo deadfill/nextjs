@@ -1,14 +1,21 @@
 import { Product } from "@prisma/client";
 import { GetServerSideProps } from "next";
 import ProductItem from "../../../components/ProductItem/ProductItem";
+import { prisma } from "../../../libs/prisma";
 import styles from "./Search.module.css";
 
 export const getServerSideProps: GetServerSideProps<{
   data: Product[];
 }> = async (context) => {
   const param = context.query.q;
-  const res = await fetch(`${process.env.URL}/api/search?q=${param}`);
-  const data: Product[] = await res.json();
+  const data = await prisma.product.findMany({
+    where: {
+      name: {
+        contains: "микро",
+        mode: "insensitive",
+      },
+    },
+  });
 
   return {
     props: {
