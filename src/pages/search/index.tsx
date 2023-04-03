@@ -8,15 +8,15 @@ export const getServerSideProps: GetServerSideProps<{
   data: Product[];
 }> = async (context) => {
   const param = context.query.q;
+
   const data = await prisma.product.findMany({
     where: {
       name: {
-        contains: "микро",
+        contains: param?.toString(),
         mode: "insensitive",
       },
     },
   });
-
   return {
     props: {
       data,
@@ -26,7 +26,6 @@ export const getServerSideProps: GetServerSideProps<{
 
 export default function Search({ data }: { data: Product[] }): JSX.Element {
   const render = data.map((item) => {
-    console.log(item);
     return (
       <ProductItem
         key={item.id}
