@@ -7,7 +7,7 @@ export const getServerSideProps: GetServerSideProps<{
   data: Product[];
 }> = async (context) => {
   const param = context.query.q;
-  const res = await fetch(`http://localhost:3000/api/search?q=${param}`);
+  const res = await fetch(`/api/search?q=${param}`);
   const data: Product[] = await res.json();
 
   return {
