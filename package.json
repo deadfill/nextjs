@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^6.5.1",
+    "eslint": "^8.37.0",
     "prisma": "^4.12.0"
   }
 }
