@@ -1,6 +1,8 @@
 version: '3'
 services:
   nextjs: 
+    environment:
+    - DATABASE_URL=postgresql://deadfill:filldead18101990@host.docker.internal:5432/electro_db
     build: ./
   nginx: 
     build: ./nginx
