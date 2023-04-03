@@ -1,8 +1,6 @@
 import { Product } from "@prisma/client";
 import { GetServerSideProps } from "next";
-import { useSelector } from "react-redux";
 import ProductItem from "../../../components/ProductItem/ProductItem";
-import { AppState, wrapper } from "../../../redux/store";
 import styles from "./Search.module.css";
 
 export const getServerSideProps: GetServerSideProps<{
@@ -20,10 +18,6 @@ export const getServerSideProps: GetServerSideProps<{
 };
 
 export default function Search({ data }: { data: Product[] }): JSX.Element {
-  const product = useSelector(
-    (state: AppState) => state.rootReducer.productSlice.product
-  );
-  console.log(product);
   const render = data.map((item) => {
     console.log(item);
     return (

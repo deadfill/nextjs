@@ -7,7 +7,6 @@ import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 export default function Search({
-  minLength,
   children,
   setOpened,
   opened,
@@ -37,7 +36,6 @@ export default function Search({
         <form onSubmit={onSearch}>
           <input
             required
-            minLength={3}
             value={query}
             onClick={openSearch}
             className={clsx(styles.seacrhInput, {

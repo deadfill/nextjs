@@ -1,11 +1,9 @@
 import { configureStore, ThunkAction, Action, combineReducers } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import menuSlice from './slices/menuSlice'
-import productSlice from "./slices/productSlice";
 
 const rootReducer = combineReducers({
-  menuSlice,
-  productSlice,
+  menuSlice
 })
 
 const makeStore = () =>

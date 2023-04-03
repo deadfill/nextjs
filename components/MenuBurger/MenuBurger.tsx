@@ -126,7 +126,7 @@ export default function MenuBurger({
       >
         <h3 className={styles.htag}>{title}</h3>
         {render
-          ? menuLevel2.map((item, i) => {
+          ? menuLevel2.map((item: any, i) => {
               return <button key={i}>{item.name}</button>;
             })
           : null}

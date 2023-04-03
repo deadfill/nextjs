@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/eslint-plugin-next": "^13.2.4",
     "@prisma/client": "^4.12.0",
     "@reduxjs/toolkit": "^1.9.3",
     "@types/node": "18.14.6",
