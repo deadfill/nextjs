@@ -15,16 +15,15 @@ export default function Search({
   const router = useRouter();
   const [query, setQuery] = useState<string>("");
   const dispatch = useDispatch();
-  const dynamicRoute = useRouter().asPath;
 
-  useEffect(() => setQuery(""), [dynamicRoute]);
+  useEffect(() => setQuery(""), [router.asPath]);
 
   const openSearch = () => {
     setOpened(true);
     dispatch(setClose());
   };
 
-  const onSearch = (e: FormEvent) => {
+  const handleSearchSubmit = (e: FormEvent) => {
     e.preventDefault();
     setOpened(false);
     setQuery("");
@@ -33,7 +32,7 @@ export default function Search({
   return (
     <>
       <div className={styles.wrapper}>
-        <form onSubmit={onSearch}>
+        <form onSubmit={handleSearchSubmit}>
           <input
             required
             value={query}

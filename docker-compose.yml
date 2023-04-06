@@ -1,41 +1,56 @@
-version: '3'
+version: '3.9'
+
 services:
-  nextjs: 
+  nextjs:
     environment:
-    - DATABASE_URL=postgresql://deadfill:filldead18101990@host.docker.internal:5432/electro_db
-    build: ./
+    - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-password}@db:5432/${POSTGRES_DB:-appdb}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run start
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    networks:
+      - app_network
+  db:
+    image: postgres:15.2
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_DB: ${POSTGRES_DB:-appdb}
+    ports:
+      - '5432:5432'
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - '8080:80'
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin@example.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-password}
+    depends_on:
+      - db
+    networks:
+      - app_network
   nginx: 
     build: ./nginx
     ports:
       - 80:80
-  postgres:
-    container_name: postgres
-    image: postgres:15.2-alpine
-    environment:
-      POSTGRES_USER: deadfill
-      POSTGRES_PASSWORD: filldead18101990
-      POSTGRES_DB: electro_db
-    volumes:
-       - ./postgres-data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+    depends_on:
+      - nextjs
     networks:
-      - postgres
-    restart: unless-stopped
-  pgadmin:
-    container_name: pgadmintest
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: 12fill12@mail.ru
-      PGADMIN_DEFAULT_PASSWORD: filldead18101990
-    ports:
-      - "5050:80"
-    networks:
-      - postgres
-    links:
-      - "postgres"
-    restart: unless-stopped
+      - app_network
+
+volumes:
+  db_data:
 
 networks:
-  postgres:
+  app_network:
     driver: bridge

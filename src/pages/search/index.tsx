@@ -7,12 +7,12 @@ import styles from "./Search.module.css";
 export const getServerSideProps: GetServerSideProps<{
   data: Product[];
 }> = async (context) => {
-  const param = context.query.q;
+  const searchQuery = context.query.q as string;
 
   const data = await prisma.product.findMany({
     where: {
       name: {
-        contains: param?.toString(),
+        contains: searchQuery,
         mode: "insensitive",
       },
     },
